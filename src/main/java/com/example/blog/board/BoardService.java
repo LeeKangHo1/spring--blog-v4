@@ -1,5 +1,6 @@
 package com.example.blog.board;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +30,11 @@ public class BoardService {
     public BoardResponse.DetailDTO 게시글상세보기(int id) {
         Board board = boardRepository.findById(id);
         return new BoardResponse.DetailDTO(board);
+    }
+
+    // 이게 있어야 commit을 한다. 메서드 실행 도중 문제가 생기면 롤백
+    @Transactional
+    public void 게시글쓰기(BoardRequest.SaveDTO saveDTO) {
+        boardRepository.save(saveDTO.getTitle(), saveDTO.getContent());
     }
 }

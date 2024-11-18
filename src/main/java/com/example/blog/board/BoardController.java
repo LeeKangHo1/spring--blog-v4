@@ -1,10 +1,12 @@
 package com.example.blog.board;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -16,6 +18,24 @@ public class BoardController {
     // 유일하게 클라이언트에게 노출된 클래스 -> API / service, repository는 노출 x
 
     private final BoardService boardService;
+
+    @GetMapping("/save-form")
+    public String saveForm() {
+        return "save-form";
+    }
+
+    @PostMapping("/board/save")
+    public String save(BoardRequest.SaveDTO saveDTO) {
+        // Board로 받으면 id랑 createdAt는 null이 된다. 필요한 값만 받자
+        // x-www...는 클래스로 받을 수 있다. @RequestParam 안 써도 된다.
+
+        boardService.게시글쓰기(saveDTO);
+
+//        response.setStatus(302); // header 302
+//        response.setHeader("Location", "/");
+
+        return "redirect:/";
+    }
 
     @GetMapping("/") // invoke로 실행하니까 메서드 이름이 중요하지 않다.
     public String list(Model model) { // DS 디스패쳐 서블릿 (request객체를 model이라는 객체로 랩핑해서 전달해준다)

@@ -15,6 +15,25 @@ public class BoardRepositoryTest {
     @Autowired
     private BoardRepository boardRepository;
 
+    @Test
+    public void save_test() {
+        // given
+        String title = "제목6";
+        String content = "내용6";
+
+        // when
+        boardRepository.save(title, content);
+
+        // eye
+        // findById을 만들어 뒀기 때문에 여기서 테스트 가능
+        // -> 기능을 순서대로 개발하면서 하나하나 테스트 해야 하는 이유
+        Board board = boardRepository.findById(6);
+        System.out.println(board.getId());
+        System.out.println(board.getTitle());
+        System.out.println(board.getContent());
+
+    } // rolleback (@Transactional) (@DataJpaTest 안에 포함)
+
     @Test // test는 _ 사용하는 관례가 있다.
     public void findAll_test() {
         // given (메서드의 매개 변수)
