@@ -27,6 +27,12 @@ public class BoardService {
         return dtos;
     }
 
+    // 게시글상세보기랑 같은 내용이지만 따로 만드는게 좋다.
+    public BoardResponse.UpdateFormDTO 게시글수정화면보기(int id) {
+        Board board = boardRepository.findById(id);
+        return new BoardResponse.UpdateFormDTO(board);
+    }
+
     public BoardResponse.DetailDTO 게시글상세보기(int id) {
         Board board = boardRepository.findById(id);
         return new BoardResponse.DetailDTO(board);

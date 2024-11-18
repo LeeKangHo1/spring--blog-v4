@@ -20,17 +20,17 @@ public class BoardController {
     private final BoardService boardService;
 
     // 글 업데이트
-    @PostMapping("/board/{id}/update")
-    public String updateBoard(@PathVariable int id, BoardRequest.UpdateDTO updateDTO) {
+    @PostMapping("/board/{id}/update-form")
+    public String updateBoard(@PathVariable("id") int id, BoardRequest.UpdateDTO updateDTO) {
         boardService.게시글업데이트(id, updateDTO);
         return "redirect:/";
     }
 
     // 업데이트 폼으로 이동
-    @GetMapping("/board/{id}/update")
-    public String toUpdateForm(@PathVariable int id, Model model) {
-        BoardResponse.DetailDTO boardDetail = boardService.게시글상세보기(id);
-        model.addAttribute("model", boardDetail);
+    @GetMapping("/board/{id}/update-form")
+    public String updateForm(@PathVariable("id") int id, Model model) {
+        BoardResponse.UpdateFormDTO updateFormDTO = boardService.게시글수정화면보기(id);
+        model.addAttribute("model", updateFormDTO);
         return "update-form";
     }
 
@@ -42,13 +42,13 @@ public class BoardController {
     }
 
     // 글 작성 폼으로 이동
-    @GetMapping("/save-form")
+    @GetMapping("/board/save-form")
     public String saveForm() {
         return "save-form";
     }
 
     // 글 작성
-    @PostMapping("/board/save")
+    @PostMapping("/board/save-form")
     public void save(BoardRequest.SaveDTO saveDTO, HttpServletResponse response) {
         // Board로 받으면 id랑 createdAt는 null이 된다. 필요한 값만 받자
         // x-www...는 클래스로 받을 수 있다. @RequestParam 안 써도 된다.
