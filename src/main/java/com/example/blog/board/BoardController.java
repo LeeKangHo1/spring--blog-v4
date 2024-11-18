@@ -25,13 +25,15 @@ public class BoardController {
 
         return "list";
     }
-
+    /**
+     * 쿼리스트링(where절) : /board?title=바다
+     * 패스변수(where절) : /board/1
+     */
     // 보드 상세보기 만들기
     @GetMapping("/board/{id}")
-    public String boardDetail(@PathVariable int id, Model model) {
-        Board board = boardService.findById(id);
-
-        model.addAttribute("model", board);
+    public String detail(@PathVariable("id") int id, Model model) {
+        BoardResponse.DetailDTO boardDetail = boardService.게시글상세보기(id);
+        model.addAttribute("model", boardDetail);
         return "detail";
     }
 }

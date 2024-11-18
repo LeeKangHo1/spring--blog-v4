@@ -1,7 +1,6 @@
 package com.example.blog.board;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,8 +26,8 @@ public class BoardService {
         return dtos;
     }
 
-    public Board findById(int id) {
+    public BoardResponse.DetailDTO 게시글상세보기(int id) {
         Board board = boardRepository.findById(id);
-        return board;
+        return new BoardResponse.DetailDTO(board);
     }
 }

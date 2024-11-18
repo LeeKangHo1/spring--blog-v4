@@ -23,7 +23,8 @@ public class BoardRepository {
 
     public Board findById(int id) {
         Query q = em.createNativeQuery("select * from board_tb where id = ?", Board.class);
-        return (Board) q.setParameter(1, id).getSingleResult();
+        // 물음표 완성하기 (물음표 순서, 물음표에 바인딩될 변수값
+        q.setParameter(1, id);
+        return (Board) q.getSingleResult();
     }
-
 }
