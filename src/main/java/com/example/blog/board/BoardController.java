@@ -19,24 +19,49 @@ public class BoardController {
 
     private final BoardService boardService;
 
+    // 글 업데이트
+    @PostMapping("/board/{id}/update")
+    public String updateBoard(@PathVariable int id, BoardRequest.UpdateDTO updateDTO) {
+        boardService.게시글업데이트(id, updateDTO);
+        return "redirect:/";
+    }
+
+    // 업데이트 폼으로 이동
+    @GetMapping("/board/{id}/update")
+    public String toUpdateForm(@PathVariable int id, Model model) {
+        BoardResponse.DetailDTO boardDetail = boardService.게시글상세보기(id);
+        model.addAttribute("model", boardDetail);
+        return "update-form";
+    }
+
+    // 글 삭제
+    @PostMapping("/board/{id}/delete")
+    public String delete(@PathVariable int id) {
+        boardService.게시글삭제(id);
+        return "redirect:/";
+    }
+
+    // 글 작성 폼으로 이동
     @GetMapping("/save-form")
     public String saveForm() {
         return "save-form";
     }
 
+    // 글 작성
     @PostMapping("/board/save")
-    public String save(BoardRequest.SaveDTO saveDTO) {
+    public void save(BoardRequest.SaveDTO saveDTO, HttpServletResponse response) {
         // Board로 받으면 id랑 createdAt는 null이 된다. 필요한 값만 받자
         // x-www...는 클래스로 받을 수 있다. @RequestParam 안 써도 된다.
 
         boardService.게시글쓰기(saveDTO);
 
-//        response.setStatus(302); // header 302
-//        response.setHeader("Location", "/");
+        response.setStatus(302); // header 302
+        response.setHeader("Location", "/");
 
-        return "redirect:/";
+//        return "redirect:/";
     }
 
+    // 메인화면이자 전체 글 조회
     @GetMapping("/") // invoke로 실행하니까 메서드 이름이 중요하지 않다.
     public String list(Model model) { // DS 디스패쳐 서블릿 (request객체를 model이라는 객체로 랩핑해서 전달해준다)
         List<BoardResponse.DTO> boardList = boardService.게시글목록보기();
@@ -49,7 +74,7 @@ public class BoardController {
      * 쿼리스트링(where절) : /board?title=바다
      * 패스변수(where절) : /board/1
      */
-    // 보드 상세보기 만들기
+    // 글 상세보기 만들기
     @GetMapping("/board/{id}")
     public String detail(@PathVariable("id") int id, Model model) {
         BoardResponse.DetailDTO boardDetail = boardService.게시글상세보기(id);

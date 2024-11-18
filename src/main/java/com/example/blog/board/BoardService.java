@@ -37,4 +37,14 @@ public class BoardService {
     public void 게시글쓰기(BoardRequest.SaveDTO saveDTO) {
         boardRepository.save(saveDTO.getTitle(), saveDTO.getContent());
     }
+
+    @Transactional
+    public void 게시글삭제(int id) {
+        boardRepository.delete(id);
+    } // commit or rollback (select빼고 delete, insert, update에 필요)
+
+    @Transactional
+    public void 게시글업데이트(int id, BoardRequest.UpdateDTO updateDTO) {
+        boardRepository.update(id, updateDTO.getTitle(), updateDTO.getContent());
+    }
 }

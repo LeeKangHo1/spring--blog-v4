@@ -16,6 +16,34 @@ public class BoardRepositoryTest {
     private BoardRepository boardRepository;
 
     @Test
+    public void update_test() {
+        // given
+        int id = 1;
+        String title = "testTitle";
+        String content = "testContent";
+        // when
+        boardRepository.update(id, title, content);
+        // eye
+        Board board = boardRepository.findById(id);
+        System.out.println(board.getId());
+        System.out.println(board.getTitle());
+        System.out.println(board.getContent());
+        System.out.println(board.getCreatedAt());
+    }
+
+    @Test
+    public void delete_test() {
+        // given
+        int id = 1;
+        // when
+        boardRepository.delete(id);
+        // eye, 없는 걸로 select하면 예외가 생겨서 findAll로
+        // 정석은 select하고 예외처리 코드도 작성
+        List<Board> boardList = boardRepository.findAll();
+        System.out.println("size : " + boardList.size());
+    }
+
+    @Test
     public void save_test() {
         // given
         String title = "제목6";
