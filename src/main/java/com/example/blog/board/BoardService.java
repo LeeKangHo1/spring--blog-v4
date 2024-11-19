@@ -14,17 +14,17 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
-    public List<BoardResponse.DTO> 게시글목록보기() {
-        List<BoardResponse.DTO> dtos = new ArrayList<>();
+    public List<BoardResponse.ReadDTO> 게시글목록보기() {
+        List<BoardResponse.ReadDTO> readDtos = new ArrayList<>();
 
         List<Board> boardList = boardRepository.findAll();
 
         // 딥 카피
         for (Board board : boardList) {
-            BoardResponse.DTO dto = new BoardResponse.DTO(board);
-            dtos.add(dto);
+            BoardResponse.ReadDTO readDto = new BoardResponse.ReadDTO(board);
+            readDtos.add(readDto);
         }
-        return dtos;
+        return readDtos;
     }
 
     // 게시글상세보기랑 같은 내용이지만 따로 만드는게 좋다.
@@ -50,7 +50,7 @@ public class BoardService {
     } // commit or rollback (select빼고 delete, insert, update에 필요)
 
     @Transactional
-    public void 게시글업데이트(int id, BoardRequest.UpdateDTO updateDTO) {
+    public void 게시글수정하기(int id, BoardRequest.UpdateDTO updateDTO) {
         boardRepository.update(id, updateDTO.getTitle(), updateDTO.getContent());
     }
 }

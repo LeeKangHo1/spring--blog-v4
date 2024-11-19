@@ -3,12 +3,6 @@ package com.example.blog.board;
 import com.example.blog._core.util.DateToForm;
 import lombok.Data;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-
 public class BoardResponse {
     // 여러 개의 DTO 객체를 관리하기 위해 BoardResponse 클래스 작성
 
@@ -43,12 +37,12 @@ public class BoardResponse {
     }
 
     @Data // Getter, Setter 필요
-    public static class DTO {
+    public static class ReadDTO {
         // BoardResponse.DTO 로 쓰기 위해 static으로 올리는 것
         private int id;
         private String title;
 
-        public DTO(Board board) {
+        public ReadDTO(Board board) {
             this.id = board.getId();
             this.title = board.getTitle();
         }

@@ -22,8 +22,8 @@ public class BoardController {
     // 글 업데이트
     @PostMapping("/board/{id}/update-form")
     public String updateBoard(@PathVariable("id") int id, BoardRequest.UpdateDTO updateDTO) {
-        boardService.게시글업데이트(id, updateDTO);
-        return "redirect:/";
+        boardService.게시글수정하기(id, updateDTO);
+        return "redirect:/board/" + id; // 상세 글 보기로 이동
     }
 
     // 업데이트 폼으로 이동
@@ -64,7 +64,7 @@ public class BoardController {
     // 메인화면이자 전체 글 조회
     @GetMapping("/") // invoke로 실행하니까 메서드 이름이 중요하지 않다.
     public String list(Model model) { // DS 디스패쳐 서블릿 (request객체를 model이라는 객체로 랩핑해서 전달해준다)
-        List<BoardResponse.DTO> boardList = boardService.게시글목록보기();
+        List<BoardResponse.ReadDTO> boardList = boardService.게시글목록보기();
         // key 이름은 일부러 model로 (여러 개 담을거면 models)
         model.addAttribute("models", boardList);
 
