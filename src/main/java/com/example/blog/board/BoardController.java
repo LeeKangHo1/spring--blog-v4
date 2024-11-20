@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 
-@RequiredArgsConstructor // 필드와 @NonNull 애노테이션이 붙은 필드에 대해 생성자를 자동으로 생성해줍니다
+@RequiredArgsConstructor // final 필드와 @NonNull 애노테이션이 붙은 필드에 대해 생성자를 자동으로 생성해줍니다
 @Controller // IOC에 집어 넣는다.
 public class BoardController {
     // 책임: 외부 클라이언트에게 요청을 받으면 응답을 해주는 객체
