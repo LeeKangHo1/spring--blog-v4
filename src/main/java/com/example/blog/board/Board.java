@@ -24,4 +24,10 @@ public class Board {
 
     @CreationTimestamp
     private Timestamp createdAt;
+
+    // setter는 함부로 만들면 안된다. 필요한 부분만 수정하는 메서드 작성
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }
