@@ -49,16 +49,9 @@ public class BoardController {
 
     // 글 작성
     @PostMapping("/board/save-form")
-    public void save(BoardRequest.SaveDTO saveDTO, HttpServletResponse response) {
-        // Board로 받으면 id랑 createdAt는 null이 된다. 필요한 값만 받자
-        // x-www...는 클래스로 받을 수 있다. @RequestParam 안 써도 된다.
-
+    public String saveV2(BoardRequest.SaveDTO saveDTO) {
         boardService.게시글쓰기(saveDTO);
-
-        response.setStatus(302); // header 302
-        response.setHeader("Location", "/");
-
-//        return "redirect:/";
+        return "redirect:/";
     }
 
     // 메인화면이자 전체 글 조회

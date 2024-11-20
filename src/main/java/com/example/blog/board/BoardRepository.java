@@ -29,13 +29,9 @@ public class BoardRepository {
         q.executeUpdate(); // insert, update, delete 때 사용
     }
 
-    public void save(String title, String content) {
-        Query q = em.createNativeQuery("insert into board_tb (title, content, created_at) values(?, ?, now())");
-        q.setParameter(1, title);
-        q.setParameter(2, content);
-        q.executeUpdate(); // 쿼리문 실행 해
-        // 잘 됬을 때 return 1 하지 않는다. -> SRP에 따라 처리할 다른 클래스 생성
-        // 여기서 커밋하는게 아니다. insert문 실행만 된 상태
+    public void save(Board board) {
+        // 객체를 만들어서 던지면 insert 자동으로 해준다.
+        em.persist(board);
     }
 
     public List<Board> findAll() {
