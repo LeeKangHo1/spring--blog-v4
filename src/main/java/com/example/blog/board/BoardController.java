@@ -50,6 +50,7 @@ public class BoardController {
     // 글 작성
     @PostMapping("/board/save-form")
     public String saveV2(BoardRequest.SaveDTO saveDTO) {
+
         boardService.게시글쓰기(saveDTO);
         return "redirect:/";
     }
