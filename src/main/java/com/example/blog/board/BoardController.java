@@ -1,9 +1,11 @@
 package com.example.blog.board;
 
-import jakarta.servlet.http.HttpServletResponse;
+import com.example.blog._core.error.ex.Exception400;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +23,7 @@ public class BoardController {
 
     // 글 업데이트
     @PostMapping("/board/{id}/update-form")
-    public String updateBoard(@PathVariable("id") int id, BoardRequest.UpdateDTO updateDTO) {
+    public String updateBoard(@PathVariable("id") int id, @Valid BoardRequest.UpdateDTO updateDTO, Errors errors) {
         boardService.게시글수정하기(id, updateDTO);
         return "redirect:/board/" + id; // 상세 글 보기로 이동
     }
@@ -49,8 +51,7 @@ public class BoardController {
 
     // 글 작성
     @PostMapping("/board/save-form")
-    public String saveV2(BoardRequest.SaveDTO saveDTO) {
-
+    public String saveV2(@Valid BoardRequest.SaveDTO saveDTO, Errors errors) {
         boardService.게시글쓰기(saveDTO);
         return "redirect:/";
     }
