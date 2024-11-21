@@ -23,14 +23,14 @@ public class BoardController {
 
     // 글 업데이트
     @PostMapping("/board/{id}/update-form")
-    public String updateBoard(@PathVariable("id") int id, @Valid BoardRequest.UpdateDTO updateDTO, Errors errors) {
+    public String updateBoard(@PathVariable("id") Integer id, @Valid BoardRequest.UpdateDTO updateDTO, Errors errors) {
         boardService.게시글수정하기(id, updateDTO);
         return "redirect:/board/" + id; // 상세 글 보기로 이동
     }
 
     // 업데이트 폼으로 이동
     @GetMapping("/board/{id}/update-form")
-    public String updateForm(@PathVariable("id") int id, Model model) {
+    public String updateForm(@PathVariable("id") Integer id, Model model) {
         BoardResponse.UpdateFormDTO updateFormDTO = boardService.게시글수정화면보기(id);
         model.addAttribute("model", updateFormDTO);
         return "update-form";
@@ -38,7 +38,7 @@ public class BoardController {
 
     // 글 삭제
     @PostMapping("/board/{id}/delete")
-    public String delete(@PathVariable int id) {
+    public String delete(@PathVariable Integer id) {
         boardService.게시글삭제(id);
         return "redirect:/";
     }
@@ -71,7 +71,7 @@ public class BoardController {
      */
     // 글 상세보기 만들기
     @GetMapping("/board/{id}")
-    public String detail(@PathVariable("id") int id, Model model) {
+    public String detail(@PathVariable("id") Integer id, Model model) {
         BoardResponse.DetailDTO boardDetail = boardService.게시글상세보기(id);
         model.addAttribute("model", boardDetail);
         return "detail";
