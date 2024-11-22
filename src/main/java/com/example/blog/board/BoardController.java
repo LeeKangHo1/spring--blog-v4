@@ -22,7 +22,7 @@ public class BoardController {
     private final BoardService boardService;
 
     // 글 업데이트
-    @PostMapping("/board/{id}/update-form")
+    @PostMapping("/board/{id}/update")
     public String updateBoard(@PathVariable("id") Integer id, @Valid BoardRequest.UpdateDTO updateDTO, Errors errors) {
         boardService.게시글수정하기(id, updateDTO);
         return "redirect:/board/" + id; // 상세 글 보기로 이동
@@ -50,7 +50,7 @@ public class BoardController {
     }
 
     // 글 작성
-    @PostMapping("/board/save-form")
+    @PostMapping("/board/save")
     public String saveV2(@Valid BoardRequest.SaveDTO saveDTO, Errors errors) {
         boardService.게시글쓰기(saveDTO);
         return "redirect:/";
