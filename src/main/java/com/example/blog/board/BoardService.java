@@ -24,11 +24,12 @@ public class BoardService {
     }
 
     // 게시글상세보기랑 같은 내용이지만 따로 만드는게 좋다.
-    public BoardResponse.UpdateFormDTO 게시글수정화면보기(int id) {
-        Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new Exception404("해당 id의 게시글이 없습니다 : " + id));
-        return new BoardResponse.UpdateFormDTO(board);
-    }
+    // json 주고받기도 따로 만드는게 났지만 지금은 상세보기 재활용할 예정
+//    public BoardResponse.UpdateFormDTO 게시글수정화면보기(int id) {
+//        Board board = boardRepository.findById(id)
+//                .orElseThrow(() -> new Exception404("해당 id의 게시글이 없습니다 : " + id));
+//        return new BoardResponse.UpdateFormDTO(board);
+//    }
 
     public BoardResponse.DetailDTO 게시글상세보기(int id) {
         Board board = boardRepository.findById(id)

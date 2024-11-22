@@ -22,20 +22,21 @@ public class BoardResponse {
         }
     }
 
-    @Data
-    public static class UpdateFormDTO {
-        private int id;
-        private String title;
-        private String content;
-        private String createdAt; // Timestamp인데 string으로 해도 된다.
-
-        public UpdateFormDTO(Board board) {
-            this.id = board.getId();
-            this.title = board.getTitle();
-            this.content = board.getContent();
-            this.createdAt = DateToForm.dateToFrom(board);
-        }
-    }
+    // 필요 없어짐
+//    @Data
+//    public static class UpdateFormDTO {
+//        private int id;
+//        private String title;
+//        private String content;
+//        private String createdAt; // Timestamp인데 string으로 해도 된다.
+//
+//        public UpdateFormDTO(Board board) {
+//            this.id = board.getId();
+//            this.title = board.getTitle();
+//            this.content = board.getContent();
+//            this.createdAt = DateToForm.dateToFrom(board);
+//        }
+//    }
 
     @Data // Getter, Setter 필요
     public static class ReadDTO {

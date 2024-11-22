@@ -31,7 +31,51 @@
         let root = document.querySelector("#root");
         renderList(); 
 
-        // 1. saveForm 디자인
+        // list 디자인(껍데기), srp에 따라 item 뿌리기만 담당
+        function renderList() {
+            clear();
+            let dom = `
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="list-box">
+                    
+                    </tbody>
+                </table>                
+            `;
+            root.innerHTML = dom;
+            sendList();
+        }
+
+        // item 생성
+        function renderListItem() {
+            let dom = `
+                <tr>
+                    <td>1</td>
+                    <td>제목1</td>
+                    <td><a href="javascript:void(0);" onclick="renderDetail()">상세보기</a></td>
+                </tr>       
+            `;
+            return dom;            
+        }
+        
+        function sendList() {
+            // 1. 사용자 입력값 받기 -> 필요 없다.
+
+            // 2. JSON 변환 -> 필요 없다.
+
+            // 3. API 요청
+            fetch("http://localhost:8080/api");
+
+            // 4. 응답 처리
+        }
+
+        // saveForm 디자인
         function renderSaveForm() {
             clear();
             let dom = `
@@ -54,15 +98,6 @@
             // 4. 응답 처리
         }
 
-        function sendList() {
-            // 1. 사용자 입력값 받기
-
-            // 2. JSON 변환
-
-            // 3. API 요청
-
-            // 4. 응답 처리
-        }
 
         function sendDelete() {
             // 1. 사용자 입력값 받기
@@ -84,39 +119,7 @@
             // 4. 응답 처리
         }
 
-        // list 디자인(껍데기), srp에 따라 item 뿌리기만 담당
-        function renderList() {
-            clear();
-            let dom = `
-                <table border="1">
-                    <thead>
-                        <tr>
-                            <th>번호</th>
-                            <th>제목</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="list-box">
-                    
-                    </tbody>
-                </table>
-                <button onclick="renderDetail()">상세보기테스트</button>
-            `;
-            root.innerHTML = dom;
-            sendList();
-        }
-
-        // item 생성
-        function renderListItem() {
-            let dom = `
-                <tr>
-                    <td>1</td>
-                    <td>제목1</td>
-                    <td><a href="javascript:void(0);" onclick="renderDetail()">상세보기</a></td>
-                </tr>       
-            `;
-            return dom;            
-        }
+        
 
         // updateForm 디자인
         function renderUpdateForm() {
