@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class MyControllerAdvice {
-    // 이 클래스의 책임 : 에러처리
+    // 이 클래스의 책임 : 예외처리
 
     @ExceptionHandler(Exception400.class)
     public ResponseEntity<?> err400(Exception400 e) {
